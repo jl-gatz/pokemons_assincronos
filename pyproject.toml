@@ -1,0 +1,50 @@
+[project]
+name = "pokemon-async"
+version = "0.1.0"
+description = "Evolução do pokemon assíncrono"
+authors = [
+    {name = "JL Gatz",email = "elan.rgb@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "httpx (>=0.28.1,<0.29.0)",
+    "aiometer (>=1.0.0,<2.0.0)",
+    "rich (>=14.0.0,<15.0.0)",
+    "asyncio (>=3.4.3,<4.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "pokemons", from = "/src"}]
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.taskipy.tasks]
+run = 'time -p python evolucao__v4.py'
+lint = 'ruff check . && ruff check . --diff'
+format = 'ruff check . --fix && ruff format .'
+
+[tool.pytest.ini_options]
+pythonpath = '.'
+addopts = '-p no:warnings'
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+pytest-cov = "^6.1.1"
+ruff = "^0.11.7"
+taskipy = "^1.14.1"
+respx = "^0.22.0"
